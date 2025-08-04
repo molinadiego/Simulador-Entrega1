@@ -96,6 +96,21 @@ function listProducts(products) {
 
 /**
  *
+ * @param {Array} products
+ */
+function listProductsPrompt(products) {
+    let lista = "";
+    lista = lista + "***** LISTA DE PRODUCTOS *****\n";
+    for (let product of products) {
+        lista =
+            lista +
+            `ID ${product.id} -- ${product.description} -- ${product.name} -- U$S ${product.price} -- STOCK ${product.stock}\n`;
+    }
+    return lista;
+}
+
+/**
+ *
  * @param {Array} cart
  */
 function listCart(cart) {
@@ -185,13 +200,16 @@ let answerConfirm = confirm(`Bienvenido a la tienda online de vinos y whiskys.\n
 Presione OK para iniciar la compra o Cancelar para salir.`);
 let item = 0;
 let qty = 0;
+let lista = "";
 while (answerConfirm) {
     console.clear();
-    listProducts(products);
+    lista = listProductsPrompt(products);
     do {
+        console.log(lista);
         item = parseInt(
-            prompt(`En la consola se mustra la lista de productos,\n 
-        ingrese el ID del producto que desea adquirir :`)
+            prompt(
+                `${lista}\n` + `ingrese el ID del producto que desea adquirir :`
+            )
         );
         qty = parseInt(prompt("Ingrese la cantidad que desea :"));
     } while (isNaN(item) || isNaN(qty) || qty <= 0);
@@ -201,5 +219,7 @@ while (answerConfirm) {
 }
 
 if (cart.length > 0) {
+    console.clear();
+    console.log(listProducts(products));
     alert(ticket(cart));
 }
