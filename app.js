@@ -160,9 +160,9 @@ function ticket(cart) {
         productQty += item.quantity;
         priceTotal += item.totalprice;
     }
-    groceryList += `\n Precio total de la compra sin TAX. - $ ${priceTotal}`;
+    groceryList += `\n Precio total de la compra sin TAX. : $ ${priceTotal}`;
     priceTotalWithTax = plusTax(priceTotal, TAX);
-    groceryList += `\n Precio total con 8.4% del TAX.     - $ ${priceTotalWithTax.toFixed(
+    groceryList += `\n Precio total con 8.4% del TAX.     : $ ${priceTotalWithTax.toFixed(
         2
     )}`;
     if (productQty >= 5) {
@@ -200,16 +200,13 @@ let answerConfirm = confirm(`Bienvenido a la tienda online de vinos y whiskys.\n
 Presione OK para iniciar la compra o Cancelar para salir.`);
 let item = 0;
 let qty = 0;
-let lista = "";
 while (answerConfirm) {
     console.clear();
-    lista = listProductsPrompt(products);
+    listProducts(products);
     do {
-        console.log(lista);
         item = parseInt(
-            prompt(
-                `${lista}\n` + `ingrese el ID del producto que desea adquirir :`
-            )
+            prompt(`En la consola se muestra la lista de productos disponibles\n
+                ingrese el ID del producto que desea adquirir :`)
         );
         qty = parseInt(prompt("Ingrese la cantidad que desea :"));
     } while (isNaN(item) || isNaN(qty) || qty <= 0);
